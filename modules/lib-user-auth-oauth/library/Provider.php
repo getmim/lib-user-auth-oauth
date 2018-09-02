@@ -23,7 +23,7 @@ class Provider
     private $session;
 
     public function __construct(){
-        $this->auth_url = \Mim::$app->router->to('apiOAuthLogin');
+        $this->auth_url = \Mim::$app->router->to('apiUserAuthOAuthLogin');
 
         $this->oauth = new \OAuthProvider();
         $this->oauth->consumerHandler([$this, 'checkConsumer']);

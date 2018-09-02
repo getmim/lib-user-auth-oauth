@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <?= $this->partial('user/auth/oauth/header'); ?>
+    <title>OAuth Authorization Request</title>
+    <style>html,body{height:100%;}</style>
+</head>
+<body>
+    <div class="d-flex flex-row justify-content-center align-items-center" style="height:100%;">
+        <div class="card" style="max-width:500px;min-width:300px;margin:0 20px">
+            <div class="card-body">
+                <h5 class="card-title">Authorization Request</h5>
+                <p class="card-text">
+                    <strong><?= $app->name ?></strong> would like to use your information in
+                    accordance with their respective terms of service and privacy policy.
+                </p>
+
+                <form method="POST" class="text-right">
+                    <input type="hidden" name="allow" value="1">
+                    <a href="?oauth_token=<?= $rtoken->token ?>&deny=1" class="btn btn-default">Deny</a>
+                    <button class="btn btn-primary">Allow</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

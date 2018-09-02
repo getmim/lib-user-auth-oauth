@@ -11,7 +11,8 @@ return [
         'website' => 'http://iqbalfn.com/'
     ],
     '__files' => [
-        'modules/lib-user-auth-oauth' => ['install','update','remove']
+        'modules/lib-user-auth-oauth' => ['install','update','remove'],
+        'theme/api/user/auth/oauth'   => ['install','remove']
     ],
     '__dependencies' => [
         'required' => [
@@ -19,16 +20,26 @@ return [
                 'lib-user' => NULL
             ],
             [
+                'lib-app' => NULL
+            ],
+            [
                 'lib-model' => NULL
             ],
             [
-                'api-auth-oauth' => NULL
+                'api' => NULL
+            ],
+            [
+                'lib-view' => NULL
             ]
         ],
         'optional' => []
     ],
     'autoload' => [
         'classes' => [
+            'LibUserAuthOauth\\Controller' => [
+                'type' => 'file',
+                'base' => 'modules/lib-user-auth-oauth/controller'
+            ],
             'LibUserAuthOauth\\Server' => [
                 'type' => 'file',
                 'base' => 'modules/lib-user-auth-oauth/server'
@@ -53,5 +64,33 @@ return [
         'authorizers' => [
             'oauth' => 'LibUserAuthOauth\\Library\\Authorizer'
         ]
+    ],
+    'routes' => [
+        'api' => [
+            'apiUserAuthOAuthAccessToken' => [
+                'path' => [
+                    'value' => '/auth/oauth/access_token'
+                ],
+                'handler' => 'LibUserAuthOauth\\Controller\\Auth::access',
+                'method' => 'POST|GET'
+            ],
+            'apiUserAuthOAuthRequestToken' => [
+                'path' => [
+                    'value' => '/auth/oauth/request_token'
+                ],
+                'handler' => 'LibUserAuthOauth\\Controller\\Auth::request',
+                'method' => 'POST|GET'
+            ],
+            'apiUserAuthOAuthLogin' => [
+                'path' => [
+                    'value' => '/auth/oauth/login'
+                ],
+                'handler' => 'LibUserAuthOauth\\Controller\\Auth::login',
+                'method' => 'POST|GET'
+            ]
+        ]
+    ],
+    'libUserAuthOauth' => [
+        'loginRoute' => 'siteLogin'
     ]
 ];
