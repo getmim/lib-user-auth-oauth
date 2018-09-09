@@ -18,7 +18,7 @@ Tambahkan konfigurasi seperti di bawah pada konfigurasi aplikasi/module.
 
 ```php
 return [
-    'apiAuthOAuth' => [
+    'libUserAuthOauth' => [
         'loginRoute' => 'siteLogin'
     ]
 ];

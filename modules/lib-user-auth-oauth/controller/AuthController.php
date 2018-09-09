@@ -58,10 +58,11 @@ class AuthController extends \Api\Controller
         if(!$this->user->isLogin()){
             $router = $this->config->libUserAuthOauth->loginRoute;
             $next = $this->router->to($router, [], [
-                'next' => $this->req->url
+                'next' => $this->req->url,
+                'app'  => $app->id
             ]);
 
-            $this->res->redirect($next);
+            return $this->res->redirect($next);
         }
 
         if($this->req->getQuery('deny') == 1){
