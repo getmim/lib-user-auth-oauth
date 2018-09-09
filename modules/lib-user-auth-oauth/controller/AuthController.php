@@ -59,7 +59,8 @@ class AuthController extends \Api\Controller
             $router = $this->config->libUserAuthOauth->loginRoute;
             $next = $this->router->to($router, [], [
                 'next' => $this->req->url,
-                'app'  => $app->id
+                'app'  => $app->id,
+                'app_type' => 'oauth'
             ]);
 
             return $this->res->redirect($next);
