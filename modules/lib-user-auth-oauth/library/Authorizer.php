@@ -8,6 +8,7 @@
 namespace LibUserAuthOauth\Library;
 
 use LibUserAuthOauth\Library\Provider;
+use LibEvent\Library\Event;
 
 class Authorizer
     implements 
@@ -59,6 +60,8 @@ class Authorizer
     }
 
     static function loginById(string $identity): ?array {
+        if(module_exists('lib-event'))
+            Event::trigger('user:authorized', $identity);
         return null;
     }
 

@@ -10,6 +10,7 @@ namespace LibUserAuthOauth\Controller;
 use LibUserAuthOauth\Library\Authorizer;
 use LibUserAuthOauth\Model\UserAuthOauthSession as UAOSession;
 use LibApp\Model\App;
+use LibEvent\Library\Event;
 
 class AuthController extends \Api\Controller
 {
@@ -88,6 +89,9 @@ class AuthController extends \Api\Controller
             ]);
 
             $next.= $sign . $query;
+
+            if(module_exists('lib-event'))
+                Event::trigger('user:authorized', $this->user->id);
 
             return $this->res->redirect($next);
         }
