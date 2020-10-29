@@ -20,6 +20,13 @@ class Authorizer
 
     private static $session;
 
+    static function getAppId(): ?int{
+        if(!self::$session)
+            return null;
+
+        return self::$session->app;
+    }
+
     static function getProvider(): object{
         if(!self::$provider)
             self::$provider = new Provider();
